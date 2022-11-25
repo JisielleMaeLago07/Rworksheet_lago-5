@@ -1,0 +1,138 @@
+install.packages("ggplot2")
+library(ggplot2)
+library(ggplot2)
+
+#1
+#a.	Plot the data using a bar graph. 
+
+Enrollment <-c(80,75,70,60)
+barplot(Enrollment,
+        main="BS in Computer Science",
+        xlab="course year",
+        ylab="2019-2020",
+        names.arg = c("1st", "2nd", "3rd", "4th"),
+        col="blue",)
+
+
+#b.	Using the same table, label the barchart with
+#Title = ” Enrollment of BS Computer Science
+#horizontal axis = “Curriculum Year” and
+#vertical axis = “number of students”
+
+Enrollment <-c(60,70,75,80)
+barplot(Enrollment,
+        main="BS in Computer Science",
+        xlab="Curriculum Year",
+        ylab="number of students",
+        names.arg = c("1st", "2nd", "3rd", "4th"),)
+
+
+
+
+
+#2
+#A"
+spent <- c(60,10,5,25)
+barplot(spent,names.arg = c("Food", "Electricity", "Savings", "Miscllaneous"))
+
+
+#b.	Plot the data using a pie chart. Add labels, colors and legend.
+#Write the codes and its result.
+
+pie(spent)
+spnt1 <- pie(spent,
+              col = rainbow(length(spent)),
+              labels = c(60,10,5,25))
+
+sp1 <- round(spent/sum(spent) * 100, 1)
+
+sp1 <- paste(sp1,"%",sep = "")
+pie(spent, main = "spent",col=rainbow(length(spent)),labels = sp1,cex=0.8)
+
+legend(1, c("Food", "Electricity", "Savings", "Miscllaneous"),
+       cex = 0.8,fill = rainbow((length(spent))))
+
+
+
+
+
+
+#3.	Open the mtcars dataset.
+data("mtcars")
+
+n1<-mtcars$mpg
+n1
+
+#Aa.	Create a simple histogram specifically for mpg (miles per gallon) variable. 
+#Use $ to select the mpg only. Write the codes and its result.
+
+n3 <-hist(n1, xlab="Miles Per Gallon",
+              main="Simple Histogram")
+
+
+#b.b.	Colored histogram with different number of bins. hist(mtcars$mpg, breaks=12, col="red")
+#Note: breaks= controls the number of bins
+
+numb3b <-hist(n1, breaks=12, col="red", xlab="Miles Per Gallon",
+              main="Histogram of mpg")
+
+#c.	Add a Normal Curve
+n3c <-hist(n1, breaks=12, col="red", xlab="Miles Per Gallon",
+              main="Histogram with Normal Curve")
+xfit<-seq(min(n1),max(n1),length=40)
+yfit<-dnorm(xfit,mean=mean(n1),sd=sd(n1))
+yfit <- yfit*diff(n3c$mids[1:2])*length(n1)
+lines(xfit, yfit, col="blue", lwd=2)
+
+
+
+
+#4.	Open the iris dataset. Create a subset for each species.
+#a.	Write the codes and its result.
+
+data("iris")
+set1 <- subset(iris, Species == "setosa")
+set2 <- subset(iris, Species == "versicolor")
+set3 <- subset(iris, Species == "virginica")
+
+#b.	Get the mean for every characteristics of each species using colMeans(). 
+#Write the codes and its result.
+set1 <- subset(iris, Species == "setosa")
+setosa <- colMeans(set1[sapply(set1,is.numeric)])
+setosa
+
+set2 <- subset(iris, Species == "versicolor")
+versi <- colMeans(set2[sapply(set2,is.numeric)])
+versi
+
+set3<- subset(iris, Species == "virginica")
+virg<- colMeans(set3[sapply(set3,is.numeric)])
+virg
+
+
+#c. Combine all species by using rbind()
+#The table should be look like this:
+
+t1 <- rbind(setosa, versi, virg)
+t1
+
+
+#d. From the data in 4-c: Create the barplot().
+#Write the codes and its result.
+#The barplot should be like this.
+barplot(t1, beside = TRUE,
+        main = "Iris Mean",
+        xlab = "Characteristics",
+        ylab = "Mean Scores",
+        col = c("red","green","blue"))
+#Figure 1: Iris Data using Barplot
+
+
+
+
+
+
+
+
+
+
